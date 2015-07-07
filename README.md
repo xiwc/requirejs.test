@@ -1,0 +1,2 @@
+# requirejs.test
+RequireJS test.
