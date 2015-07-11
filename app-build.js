@@ -1,3 +1,46 @@
+//my/shirt.js now does setup work
+//before returning its module definition.
+define('app/cart',[],function () {
+    //Do setup work here
+
+    return {
+        add:function(sub){
+        	console.log('add:' + sub);
+        }
+    }
+});
+
+//my/shirt.js now does setup work
+//before returning its module definition.
+define('app/inventory',[],function() {
+    //Do setup work here
+
+    return {
+        decrement: function(sub) {
+            console.log('decrement:' + sub);
+        }
+    }
+});
+
+//my/shirt.js now has some dependencies, a cart and inventory
+//module in the same directory as shirt.js
+define('app/sub',["app/cart", "app/inventory"], function(cart, inventory) {
+        //return an object to define the "my/shirt" module.
+        return {
+            color: "blue",
+            size: "large",
+            addToCart: function() {
+                inventory.decrement(this);
+                cart.add(this);
+            }
+        }
+    }
+);
+define('foo',{
+	noConflict:function(){
+		
+	}
+});
 requirejs.config({
     //By default load any module IDs from js/lib
     baseUrl: 'js/lib',
@@ -80,3 +123,5 @@ requirejs(['jquery', 'app/sub'],
 //requirejs(["app/shim"]);
 
 requirejs(["foo"]);
+define("../app", function(){});
+
